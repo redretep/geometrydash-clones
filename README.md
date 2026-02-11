@@ -7,7 +7,7 @@ A list of unblocked, free, adless **Geometry Dash clones** for web.
 ## 🚀 Play Now
 
 You can access the games directly via GitHub Pages:  
-**[redretep.github.io/geometrydash-clones]**
+**[redretep.github.io/geometrydash-clones](https://redretep.github.io/geometrydash-clones)**
 
 ---
 
@@ -15,15 +15,15 @@ You can access the games directly via GitHub Pages:
 
 | Version / Clone | Description | Link |
 | :--- | :--- | :--- |
-| **Dashmetry** | Best clone of Geometry Dash. With level builder. | [Play Here](redretep.github.io/geometrydash-clones/dashmetry.html) |
-| **Egg Dash** | The famous Griffpatch remake. | [Play Here](redretep.github.io/geometrydash-clones/egg-dash.html) |
-| **Geometry Game 3D** | 3D Remake of Geometry Dash. | [Play Here](redretep.github.io/geometrydash-clones/geometry-game-3d.html) |
-| **Geometry Jump** | Best clone of Geometry Dash. With level builder. | [Play Here](#) |
-| **Geometry Lite Classic** | A player for custom `.gmd` files. | [Play Here](#) |
-| **Spooky Dash** | The famous Griffpatch remake. | [Play Here](#) |
-| **Tap Road Beat** | Slope inspired 3D. | [Play Here](#) |
-| **Wave Dash** | A player for custom `.gmd` files. | [Play Here](#) |
-| **Xmas Dash** | Best clone of Geometry Dash. With level builder. | [Play Here](#) |
+| **Dashmetry** | Best clone of Geometry Dash. With level builder. | [Play Here](https://redretep.github.io/geometrydash-clones/dashmetry.html) |
+| **Egg Dash** | The famous Griffpatch remake. | [Play Here](https://redretep.github.io/geometrydash-clones/egg-dash.html) |
+| **Geometry Game 3D** | 3D Remake of Geometry Dash. | [Play Here](https://redretep.github.io/geometrydash-clones/geometry-game-3d.html) |
+| **Geometry Jump** | Best clone of Geometry Dash. With level builder. | [Play Here](https://redretep.github.io/geometrydash-clones/geometry-jump.html) |
+| **Geometry Lite Classic** | A player for custom `.gmd` files. | [Play Here](https://redretep.github.io/geometrydash-clones/geomtery-lite-classic.html) |
+| **Spooky Dash** | The famous Griffpatch remake. | [Play Here](https://redretep.github.io/geometrydash-clones/spooky-dash.html) |
+| **Tap Road Beat** | Slope inspired 3D. | [Play Here](https://redretep.github.io/geometrydash-clones/tap-road-beat.html) |
+| **Wave Dash** | A player for custom `.gmd` files. | [Play Here](https://redretep.github.io/geometrydash-clones/wave-dash.html) |
+| **Xmas Dash** | Best clone of Geometry Dash. With level builder. | [Play Here](https://redretep.github.io/geometrydash-clones/xmas-dash.html) |
 
 ---
 
