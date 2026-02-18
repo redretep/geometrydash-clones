@@ -11,15 +11,19 @@
             background: #0066ff;
             background: linear-gradient(#0066ff, #001a33) fixed;
             margin: 0;
+            padding: 0;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            width: 100vw;
+            font-family: sans-serif;
         }
         
         #everything {
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -30,7 +34,7 @@
         /* Hover animation: grow */
         .menubutton {
             transition: transform 0.1s ease-out;
-            width: 13vh; /* Increased size */
+            width: 10.5vw; /* Adjusted to match original scale */
             cursor: pointer;
             display: block;
         }
@@ -41,23 +45,45 @@
         /* Corner pieces fix */
         .cornerPiece {
             pointer-events: none;
-            width: 8vh;
+            width: 7vw; 
         }
 
         /* Title section */
         .logo-container {
             text-align: center;
-            margin-bottom: 4vh;
-        }
-
-        #menuButtons {
+            margin-bottom: 3vh;
+            width: 100%;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
         }
 
+        .main-logo {
+            height: 13.5vh; /* Bigger Title */
+            margin-bottom: -1vh;
+        }
+
+        #browserlogo {
+            height: 8vh;
+            margin-left: 28vh; /* Offset to the right like original */
+            filter: hue-rotate(232deg) saturate(105%);
+        }
+
+        /* Centering the button table */
+        #menuButtons {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
         table {
-            border-spacing: 2vh; /* More space between buttons */
+            border-collapse: separate;
+            border-spacing: 1.5vw;
+        }
+
+        td {
+            padding: 0;
+            text-align: center;
         }
     </style>
 </head>
@@ -86,8 +112,8 @@
 
     <!-- Title and Logo Section -->
     <div class="logo-container">
-        <img src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/gdlogo.png" style="height: 14vh;"><br>
-        <img id="browserlogo" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/browser.png" style="height: 8vh; margin-left: 25vh; filter: hue-rotate(232deg) saturate(105%);">
+        <img class="main-logo" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/gdlogo.png">
+        <img id="browserlogo" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/browser.png">
     </div>
     
     <!-- Menu Buttons -->
@@ -115,6 +141,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 $(document).ready(function() {
+    // Random color for browser logo on load
     $('#browserlogo').css('filter', `hue-rotate(${Math.floor(Math.random() * (330 - 60)) + 60}deg) saturate(${Math.floor(Math.random() * (150 - 100)) + 100}%)`)
 });
 </script>
