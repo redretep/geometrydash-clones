@@ -5,69 +5,109 @@
     <meta charset="utf-8">
     <link href="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/browser.css" type="text/css" rel="stylesheet">
     <link rel="icon" href="https://gdbrowser.com/assets/coin.png">
-    <meta id="meta-title" property="og:title" content="Geometry Dash Browser!">
-    <meta id="meta-desc" property="og:description" content="Browse all of Geometry Dash's online features, right from this website! Levels, profiles, leaderboards, comments, and more!">
-    <meta id="meta-image" name="og:image" content="https://gdbrowser.com/assets/coin.png" itemprop="image">
-    <meta name="twitter:card" content="summary">
     <style>
-        /* Hover animation: grow */
-        .menubutton, .gdButton, img[tabindex="1"] {
-            transition: transform 0.1s ease-out;
+        /* Fix background gradient and layout */
+        body.levelBG {
+            background: #0066ff;
+            background: linear-gradient(#0066ff, #001a33) fixed;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .menubutton:hover, .gdButton:hover, img[tabindex="1"]:hover {
+        
+        #everything {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Hover animation: grow */
+        .menubutton {
+            transition: transform 0.1s ease-out;
+            width: 13vh; /* Increased size */
+            cursor: pointer;
+            display: block;
+        }
+        .menubutton:hover {
             transform: scale(1.1);
         }
-        /* Fix for corners */
+
+        /* Corner pieces fix */
         .cornerPiece {
             pointer-events: none;
+            width: 8vh;
+        }
+
+        /* Title section */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 4vh;
+        }
+
+        #menuButtons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        table {
+            border-spacing: 2vh; /* More space between buttons */
         }
     </style>
 </head>
 
-<body class="levelBG" cz-shortcut-listen="true">
+<body class="levelBG">
 
 <div id="everything">
 
     <!-- Left Corners -->
-    <div style="position:absolute; bottom: 0%; left: 0%; width: 100%; pointer-events: none; z-index: 10;">
-        <img class="cornerPiece" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/corner.png" width="7%;">
+    <div style="position:absolute; bottom: 0; left: 0; pointer-events: none; z-index: 10;">
+        <img class="cornerPiece" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/corner.png">
     </div>
 
-    <div style="position:absolute; top: 0%; left: 0%; width: 100%; pointer-events: none; z-index: 10;">
-        <img class="cornerPiece" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/corner.png" width="7%;" style="transform: scaleY(-1)">
+    <div style="position:absolute; top: 0; left: 0; pointer-events: none; z-index: 10;">
+        <img class="cornerPiece" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/corner.png" style="transform: scaleY(-1)">
     </div>
 
     <!-- Right Corners -->
-    <div style="position:absolute; bottom: 0%; right: 0%; width: 100%; pointer-events: none; text-align: right; z-index: 10;">
-        <img class="cornerPiece" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/corner.png" width="7%;" style="transform: scaleX(-1)">
+    <div style="position:absolute; bottom: 0; right: 0; pointer-events: none; z-index: 10;">
+        <img class="cornerPiece" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/corner.png" style="transform: scaleX(-1)">
     </div>
 
-    <div style="position:absolute; top: 0%; right: 0%; width: 100%; pointer-events: none; text-align: right; z-index: 10;">
-        <img class="cornerPiece" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/corner.png" width="7%;" style="transform: scale(-1, -1)">
+    <div style="position:absolute; top: 0; right: 0; pointer-events: none; z-index: 10;">
+        <img class="cornerPiece" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/corner.png" style="transform: scale(-1, -1)">
+    </div>
+
+    <!-- Title and Logo Section -->
+    <div class="logo-container">
+        <img src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/gdlogo.png" style="height: 14vh;"><br>
+        <img id="browserlogo" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/browser.png" style="height: 8vh; margin-left: 25vh; filter: hue-rotate(232deg) saturate(105%);">
     </div>
     
-    <div class="supercenter center" id="menuButtons" style="bottom: 5%;">
+    <!-- Menu Buttons -->
+    <div id="menuButtons">
             <table>
                     <tbody><tr class="menuButtonList">
-                        <td><a tabindex="1" href="https://gdbrowser.com/search/*?type=saved"><img class="menubutton menu-saved" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-saved.png" title="Saved Levels"></a></td>
-                        <td><a tabindex="1" href="https://gdbrowser.com/daily"><img class="menubutton menu-daily" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-daily.png" title="Daily Level"></a></td>
-                        <td><a tabindex="1" href="https://gdbrowser.com/weekly"><img class="menubutton menu-weekly" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-weekly.png" title="Weekly Demon"></a></td>
-                        <td><a tabindex="1" href="https://gdbrowser.com/event"><img class="menubutton menu-event" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-event.png" title="Event Level"></a></td>
-                        <td><a tabindex="1" href="https://gdbrowser.com/leaderboard"><img class="menubutton menu-leaderboard" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-scores.png" title="Scores"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/search/*?type=saved"><img class="menubutton" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-saved.png" title="Saved Levels"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/daily"><img class="menubutton" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-daily.png" title="Daily Level"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/weekly"><img class="menubutton" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-weekly.png" title="Weekly Demon"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/event"><img class="menubutton" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-event.png" title="Event Level"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/leaderboard"><img class="menubutton" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-scores.png" title="Scores"></a></td>
                     </tr>
                     <tr class="menuButtonList">
-                        <td><a tabindex="1" href="https://gdbrowser.com/search/*?type=featured"><img class="menubutton menu-featured" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-featured.png" title="Featured"></a></td>
-                        <td><a tabindex="1" href="https://gdbrowser.com/gauntlets"><img class="menubutton menu-gauntlets" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-gauntlets.png" title="Gauntlets"></a></td>
-                        <td><a tabindex="1" href="https://gdbrowser.com/lists/*?type=featured"><img class="menubutton menu-lists" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-lists.png" title="Lists"></a></td>
-                        <td><a tabindex="1" href="https://gdbrowser.com/mappacks"><img class="menubutton menu-mappacks" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-packs.png" title="Map Packs"></a></td>
-                        <td><a tabindex="1" href="https://gdbrowser.com/search"><img class="menubutton menu-search" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-search.png" title="Search"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/search/*?type=featured"><img class="menubutton" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-featured.png" title="Featured"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/gauntlets"><img class="menubutton" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-gauntlets.png" title="Gauntlets"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/lists/*?type=featured"><img class="menubutton" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-lists.png" title="Lists"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/mappacks"><img class="menubutton" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-packs.png" title="Map Packs"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/search"><img class="menubutton" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/category-search.png" title="Search"></a></td>
                     </tr>
             </tbody></table>
-    </div>
-
-    <div class="center" width="100%" style="margin-top: 2%">
-        <img src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/gdlogo.png" height="11.5%"><br>
-        <img id="browserlogo" src="https://raw.githubusercontent.com/redretep/geometrydash-clones/82ab3e84d0a668419a7f34a88ef5a9217ca9d051/assets/browser.png" height="7%" style="margin: 0.5% 0% 0% 30%; filter: hue-rotate(232deg) saturate(105%);">
     </div>
 
 </div>
