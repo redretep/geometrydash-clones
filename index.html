@@ -1,179 +1,87 @@
-<!DOCTYPE html>
-<html lang="de">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geometry Dash Clones</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Geometry Dash Browser!</title>
+    <meta charset="utf-8">
+    <link href="/assets/browser.css" type="text/css" rel="stylesheet">
+    <script async="" src="/assets/google-analytics_analytics.js"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-135255146-3');</script>
+    <link rel="icon" href="https://gdbrowser.com/assets/coin.png">
+    <meta id="meta-title" property="og:title" content="Geometry Dash Browser!">
+    <meta id="meta-desc" property="og:description" content="Browse all of Geometry Dash's online features, right from this website! Levels, profiles, leaderboards, comments, and more!">
+    <meta id="meta-image" name="og:image" content="https://gdbrowser.com/assets/coin.png" itemprop="image">
+    <meta name="twitter:card" content="summary">
     <style>
-        @font-face {
-            font-family: 'Pusab';
-            src: url('Pusab.ttf');
+        /* Hover animation: grow instead of jump */
+        .menubutton, .gdButton, img[tabindex="1"] {
+            transition: transform 0.1s ease-out;
         }
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #2874ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .menubutton:hover, .gdButton:hover, img[tabindex="1"]:hover {
+            transform: scale(1.1);
         }
-
-        canvas {
-            display: block;
-            image-rendering: pixelated;
-        }
-
-        #loading {
-            position: fixed;
-            color: white;
-            font-family: 'Pusab', sans-serif;
-            font-size: 20px;
+        /* Fix for corners to stay in place */
+        .cornerPiece {
+            pointer-events: none;
         }
     </style>
 </head>
-<body>
 
-<div id="loading">Loading Assets...</div>
-<canvas id="gameCanvas"></canvas>
+<body class="levelBG" onbeforeunload="saveUrl()" cz-shortcut-listen="true">
+
+<div id="everything">
+
+    <!-- Left Corners -->
+    <div style="position:absolute; bottom: 0%; left: 0%; width: 100%; pointer-events: none; z-index: 10;">
+        <img class="cornerPiece" src="/assets/corner.png" width="7%;">
+    </div>
+
+    <div style="position:absolute; top: 0%; left: 0%; width: 100%; pointer-events: none; z-index: 10;">
+        <img class="cornerPiece" src="/assets/corner.png" width="7%;" style="transform: scaleY(-1)">
+    </div>
+
+    <!-- Right Corners -->
+    <div style="position:absolute; bottom: 0%; right: 0%; width: 100%; pointer-events: none; text-align: right; z-index: 10;">
+        <img class="cornerPiece" src="/assets/corner.png" width="7%;" style="transform: scaleX(-1)">
+    </div>
+
+    <div style="position:absolute; top: 0%; right: 0%; width: 100%; pointer-events: none; text-align: right; z-index: 10;">
+        <img class="cornerPiece" src="/assets/corner.png" width="7%;" style="transform: scale(-1, -1)">
+    </div>
+    
+    <div class="supercenter center" id="menuButtons" style="bottom: 5%;">
+            <table>
+                    <tbody><tr class="menuButtonList">
+                        <td><a tabindex="1" href="https://gdbrowser.com/search/*?type=saved"><img class="menubutton menu-saved" src="/assets/category-saved.png" title="Saved Levels"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/daily"><img class="menubutton menu-daily" src="/assets/category-daily.png" title="Daily Level"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/weekly"><img class="menubutton menu-weekly" src="/assets/category-weekly.png" title="Weekly Demon"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/event"><img class="menubutton menu-event" src="/assets/category-event.png" title="Event Level"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/leaderboard"><img class="menubutton menu-leaderboard" src="/assets/category-scores.png" title="Scores"></a></td>
+                    </tr>
+                    <tr class="menuButtonList">
+                        <td><a tabindex="1" href="https://gdbrowser.com/search/*?type=featured"><img class="menubutton menu-featured" src="/assets/category-featured.png" title="Featured"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/gauntlets"><img class="menubutton menu-gauntlets" src="/assets/category-gauntlets.png" title="Gauntlets"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/lists/*?type=featured"><img class="menubutton menu-lists" src="/assets/category-lists.png" title="Lists"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/mappacks"><img class="menubutton menu-mappacks" src="/assets/category-packs.png" title="Map Packs"></a></td>
+                        <td><a tabindex="1" href="https://gdbrowser.com/search"><img class="menubutton menu-search" src="/assets/category-search.png" title="Search"></a></td>
+                    </tr>
+            </tbody></table>
+    </div>
+
+    <div class="center" width="100%" style="margin-top: 2%">
+        <img src="/assets/gdlogo.png" height="11.5%"><br>
+        <img id="browserlogo" src="/assets/browser.png" height="7%" style="margin: 0.5% 0% 0% 30%; filter: hue-rotate(232deg) saturate(105%);">
+    </div>
+
+</div>
+
+<script type="text/javascript" src="/assets/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/pixi.js"></script>
+<script type="text/javascript" src="/assets/icon.js"></script>
+<script type="text/javascript" src="/assets/global.js"></script>
 
 <script>
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    const loadingDiv = document.getElementById('loading');
-
-    // Data
-    const clones = [
-        { name: "Dashmetry", description: "Best clone of Geometry Dash. With level builder." },
-        { name: "Egg Dash", description: "The famous Griffpatch remake." },
-        { name: "Geometry Game 3D", description: "3D Remake of Geometry Dash." },
-        { name: "Geometry Jump", description: "Best clone of Geometry Dash. With level builder." },
-        { name: "Geometry Lite Classic", description: "A player for custom .gmd files." },
-        { name: "Spooky Dash", description: "The famous Griffpatch remake." },
-        { name: "Tap Road Beat", description: "Slope inspired 3D." },
-        { name: "Wave Dash", description: "A player for custom .gmd files." },
-        { name: "Xmas Dash", description: "Best clone of Geometry Dash. With level builder." }
-    ];
-
-    // Assets
-    const assets = {
-        logo: 'logo - Geometry Dash Clones.png',
-        gold: 'gold - by redretep 2.png',
-        button: 'https://gdcolon.com/assets/blankbutton.png'
-    };
-
-    const images = {};
-    let loadedCount = 0;
-    const totalToLoad = Object.keys(assets).length + 1; // +1 for Font
-
-    function checkLoaded() {
-        loadedCount++;
-        if (loadedCount === totalToLoad) {
-            loadingDiv.style.display = 'none';
-            resize();
-            render();
-        }
-    }
-
-    // Load Font
-    const pusabFont = new FontFace('Pusab', 'url(Pusab.ttf)');
-    pusabFont.load().then(font => {
-        document.fonts.add(font);
-        checkLoaded();
-    });
-
-    // Load Images
-    for (let key in assets) {
-        images[key] = new Image();
-        images[key].src = assets[key];
-        images[key].onload = checkLoaded;
-    }
-
-    // Canvas Settings
-    const baseWidth = 1000;
-    const baseHeight = 1200;
-    let scale = 1;
-
-    function resize() {
-        const winW = window.innerWidth;
-        const winH = window.innerHeight;
-        scale = Math.min(winW / baseWidth, winH / baseHeight);
-        canvas.width = baseWidth * scale;
-        canvas.height = baseHeight * scale;
-        render();
-    }
-
-    window.addEventListener('resize', resize);
-
-    function render() {
-        if (loadedCount < totalToLoad) return;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.save();
-        ctx.scale(scale, scale);
-
-        // Header
-        if (images.logo) {
-            const logoW = 600;
-            const logoH = (images.logo.height / images.logo.width) * logoW;
-            ctx.drawImage(images.logo, (baseWidth - logoW) / 2, 40, logoW, logoH);
-        }
-
-        // Table Header
-        ctx.font = '24px Pusab';
-        ctx.fillStyle = 'white';
-        ctx.shadowColor = 'black';
-        ctx.shadowBlur = 4;
-        ctx.textAlign = 'left';
-        ctx.fillText('VERSION / CLONE', 100, 220);
-        ctx.textAlign = 'right';
-        ctx.fillText('LINK', 900, 220);
-        ctx.shadowBlur = 0;
-
-        // Render List
-        let startY = 250;
-        const rowHeight = 90;
-        const spacing = 10;
-
-        clones.forEach((clone, i) => {
-            const y = startY + (rowHeight + spacing) * i;
-            
-            // Button BG
-            ctx.drawImage(images.button, 80, y, 840, rowHeight);
-
-            // Clone Name (Left)
-            ctx.textAlign = 'left';
-            ctx.fillStyle = 'white';
-            ctx.font = '22px Pusab';
-            ctx.shadowColor = 'black';
-            ctx.shadowBlur = 3;
-            ctx.fillText(clone.name.toUpperCase(), 120, y + 55);
-
-            // Gold Badge (if description exists)
-            if (clone.description && images.gold) {
-                ctx.drawImage(images.gold, 120 + ctx.measureText(clone.name.toUpperCase()).width + 15, y + 28, 40, 40);
-            }
-
-            // Play Button (Right)
-            ctx.textAlign = 'right';
-            ctx.fillStyle = '#fdf333';
-            ctx.font = '20px Pusab';
-            ctx.fillText('PLAY HERE', 880, y + 55);
-            ctx.shadowBlur = 0;
-        });
-
-        ctx.restore();
-    }
-
-    // Interaction placeholder
-    canvas.addEventListener('click', (e) => {
-        // Logic for clicks could be added here
-        console.log("Click detected on list");
-    });
-
+$('#browserlogo').css('filter', `hue-rotate(${Math.floor(Math.random() * (330 - 60)) + 60}deg) saturate(${Math.floor(Math.random() * (150 - 100)) + 100}%)`)
 </script>
+
 </body>
 </html>
