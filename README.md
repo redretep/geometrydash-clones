@@ -1,6 +1,6 @@
 # Geometry Dash Clones
 
-A list of unblocked, free, adless **Geometry Dash clones** for web.
+A list of unblocked, free, **Geometry Dash clones** for web.
 
 ---
 
